@@ -4,7 +4,8 @@
   "description": "This api will be used to fetch project data for staff",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node index.js"
   },
   "author": "Kaushik",
   "license": "ISC",
@@ -12,7 +13,8 @@
     "config": "^3.0.1",
     "express": "^4.16.4",
     "js-yaml": "^3.12.1",
-    "mongoose": "^5.4.3",
+    "mongodb": "^3.1.10",
+    "pug": "^2.0.3",
     "request": "^2.88.0",
     "request-promise": "^4.2.2",
     "winston": "^3.1.0"
