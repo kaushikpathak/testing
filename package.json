@@ -1,0 +1,20 @@
+{
+  "name": "proworkflow",
+  "version": "1.0.0",
+  "description": "This api will be used to fetch project data for staff",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Kaushik",
+  "license": "ISC",
+  "dependencies": {
+    "config": "^3.0.1",
+    "express": "^4.16.4",
+    "js-yaml": "^3.12.1",
+    "mongoose": "^5.4.3",
+    "request": "^2.88.0",
+    "request-promise": "^4.2.2",
+    "winston": "^3.1.0"
+  }
+}
