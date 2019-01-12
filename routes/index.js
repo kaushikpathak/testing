@@ -3,9 +3,14 @@ const middleWare = require('../middleware');
 const Constants = require('../constants');
 const logger = require('winston');
 const express = require('express');
+const apiHandler = require('../apiHandler')
 const router = new express.Router();
 
-//router.get('/project/:staffId', Promise.resolve('test'));
+router.get('/project/:staffId', (request, response) => {
+    response.render('projects',{
+        projects:["dfdfd"]
+    });
+});
 
 /** Invalid URL routes */
 router.get('*', invalidUrlResponse);
