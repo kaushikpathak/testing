@@ -1,0 +1,13 @@
+## development environment configurations
+--- 
+config:
+  common:
+    port: "8585"
+    serviceName: proWorkFlow
+    url: localhost
+    proWorkFlowAPIUrl: https://api.proworkflow.net
+    userName: g1kJfSk73hj
+    password: uH83M9qK713bczD18
+    apiKey: VE4J-DTOL-GB9N-GPB9-PWFISMQ-DEV3572
+  db: 
+    mongoUrl: mongodb://localhost:27017/proworkflow
