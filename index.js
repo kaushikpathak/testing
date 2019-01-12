@@ -3,7 +3,7 @@
 const express = require('express');
 const config = require('config');
 const logger = require('winston');
-
+const _ = require('lodash');
 const routes = require('./routes');
 const constants = require('./constants');
 const Middleware = require('./middleware');
@@ -17,16 +17,26 @@ app.set('view engine', 'pug');
 
 (async ()=>{
   const dbConn = await DBManager.getConnection();
-  const {projects} = await apiHandler(logger, constants.PROJECT_END_POINT);
-  const {messages} = await apiHandler(logger, constants.MESSAGE_END_POINT);
   const {contacts} = await apiHandler(logger, constants.CONTACT_END_POINT);
+  let projects = [];
+  contacts.map(async item => {
+    const contactProject = await apiHandler(logger, `contacts/${item.id}/projects`);
+    contactProject.projects.map((obj) => {
+      obj.staffid = item.id;
+      return obj;
+  })
+    projects = projects.concat(contactProject.projects);
+  })
+  // const {projects} = await apiHandler(logger, constants.PROJECT_END_POINT);
+  // const {messages} = await apiHandler(logger, constants.MESSAGE_END_POINT);
   const {companies} = await apiHandler(logger, constants.COMPANY_END_POINT);
 
   try {
     // await dbConn.collection('projects').drop();
+    projects = _.uniqBy(projects, 'id');
     await dbConn.collection('projects').insertMany(projects);
       // await dbConn.collection('messages').drop();
-    await dbConn.collection('messages').insertMany(messages);
+    // await dbConn.collection('messages').insertMany(messages);
     // await dbConn.collection('contacts').drop();
     await dbConn.collection('contacts').insertMany(contacts);
     // await dbConn.collection('companies').drop();
