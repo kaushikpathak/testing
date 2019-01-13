@@ -1,15 +1,29 @@
 'use strict';
 const middleWare = require('../middleware');
 const Constants = require('../constants');
+const service = require('../service');
 const logger = require('winston');
 const express = require('express');
-const apiHandler = require('../apiHandler')
+const config = require('config');
 const router = new express.Router();
+const DBManager = require('../lib/mongo-db-client').create(logger, config.config.db.mongoUrl);
 
-router.get('/project/:staffId', (request, response) => {
-    response.render('projects',{
-        projects:["dfdfd"]
-    });
+router.get('/project/:staffId', async (request, response) => {
+
+    try {
+        const dbConn = await DBManager.getConnection();
+        const serviceObj = service.create(dbConn);
+
+        const data = await serviceObj.getProjects(request.params.staffId);
+        console.log(data);
+        response.render('projects',{
+            projects:data.projectCompanies,
+            staff:data.staff
+        });
+    } catch (error) {
+        console.log(error);
+    }
+    
 });
 
 /** Invalid URL routes */
