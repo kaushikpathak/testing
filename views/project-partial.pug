@@ -1,4 +1,23 @@
 mixin projectslist(projects)
-  ul
+  h2 Projects
+  table(class="table")
+    thead
+      tr
+        th Id
+        th Title
+        th Company Name
+        th Number
+        th Start Date
+        th Company Name
     each project in projects
-      li #{name}
+      tr
+        td #{project.id}
+        td #{project.title}
+        td #{project.companyname}
+        td #{project.number}
+        td #{project.startdate}
+        if project["company"] && project["company"]["name"]
+          td #{project["company"]["name"]}
+        else
+          td -
+      
