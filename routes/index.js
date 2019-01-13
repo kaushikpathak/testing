@@ -15,13 +15,12 @@ router.get('/project/:staffId', async (request, response) => {
         const serviceObj = service.create(dbConn);
 
         const data = await serviceObj.getProjects(request.params.staffId);
-        console.log(data);
         response.render('projects',{
             projects:data.projectCompanies,
             staff:data.staff
         });
     } catch (error) {
-        console.log(error);
+        logger.error('Error occurred while fetching data from db', { errorData: err });
     }
     
 });

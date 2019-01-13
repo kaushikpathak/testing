@@ -8,7 +8,7 @@ mixin projectslist(projects)
         th Company Name
         th Number
         th Start Date
-        th Company Name
+        th Due Date
     each project in projects
       tr
         td #{project.id}
@@ -16,8 +16,5 @@ mixin projectslist(projects)
         td #{project.companyname}
         td #{project.number}
         td #{project.startdate}
-        if project["company"] && project["company"]["name"]
-          td #{project["company"]["name"]}
-        else
-          td -
+        td #{project.duedate}
       
